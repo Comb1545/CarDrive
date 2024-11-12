@@ -9,6 +9,10 @@ BACKGROUND = TrackBackground
 WIDTH = TrackBackground.get_width()
 HEIGHT = TrackBackground.get_height()
 
+# init fonts for HUD
+pygame.font.init()
+font = pygame.font.SysFont("Arial", 30)
+
 # init pygame stuff
 pygame.init
 clock = pygame.time.Clock()
@@ -60,6 +64,7 @@ while running:
     # render logic
     display.blit(BACKGROUND, (0, 0))
     car.draw(display)
+    car.drawHud(display, font)
 
     # pygame stuff
     clock.tick(FPS)

@@ -34,7 +34,8 @@ class Car:
                 self.speed = 0
 
     def steer(self, angleChange):
-        self.angle += angleChange
+        # keeps angle looping between 0 - 360 degrees (2pi radians)
+        self.angle = (self.angle + angleChange) % (2 * math.pi)
 
     def move(self):
         self.x += self.speed * math.cos(self.angle)
@@ -52,3 +53,12 @@ class Car:
         
         # Blit the rotated rectangle onto the display surface
         surface.blit(rotated_car, rotated_rect.topleft)
+
+    def drawHud(self, surface, font):
+        speedText = font.render(f'Speed: {self.speed:.2f}', True, (0, 0, 0))
+        angleText = font.render(f'Angle: {math.degrees(self.angle):.2f}', True, (0, 0, 0))
+        gearText = font.render(f"Gear: {self.currentGear}/10", True, (0, 0, 0))
+
+        surface.blit(speedText, (10, 10))
+        surface.blit(angleText, (10, 50))
+        surface.blit(gearText, (10, 90))
