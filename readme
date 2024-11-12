@@ -1,0 +1,2 @@
+angles are mangaged in degrees, if radians is needed for math,
+convert to radians, do math, return degrees

@@ -1,5 +1,5 @@
 import pygame
-from car import Car
+from Car import Car
 
 
 trackName = "RaceTrack1"
@@ -54,15 +54,16 @@ while running:
 
     # Car movement logic
     if steerLeft:
-        car.steer(-0.10)
+        car.steer(-3, display)
     if steerRight:
-        car.steer(0.10)
+        car.steer(3, display)
     car.accelerate(accelerate)
 
-    car.move()
+    car.move(display)
 
     # render logic
     display.blit(BACKGROUND, (0, 0))
+    car.move(display)
     car.draw(display)
     car.drawHud(display, font)
 
