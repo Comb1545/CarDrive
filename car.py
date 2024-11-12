@@ -2,21 +2,36 @@ import pygame
 import math
 
 class Car:
-    # constants
+    # Constants
     carWidth = 20
     carHeight = 10
+    topSpeed = 10
+    accelRate = 0.2
+    decelRate = 0.1
+    gears = {1: 0.1, 2: 0.2, 3: 0.3, 4: 0.4, 5: 0.5, 6: 0.6, 7: 0.7, 8: 0.8, 9: 0.9, 10: 1.0}
 
-    def __init__(self, x, y, colour:str):
+    def __init__(self, x, y, colour: str):
         self.x = x
         self.y = y
         self.angle = 0
         self.speed = 0
+        self.currentGear = 1
 
-        # cosmetics
+        # Cosmetics
         self.colour = colour
 
-    def changeSpeed(self, speedChange):
-        self.speed += speedChange
+    def changeGear(self, gear):
+        if gear in self.gears:
+            self.currentGear = gear
+
+    def accelerate(self, isAccelerating):
+        if isAccelerating:
+            if self.speed < self.topSpeed * self.gears[self.currentGear]:
+                self.speed += self.accelRate
+        elif self.speed > 0:
+            self.speed -= self.decelRate
+            if self.speed < 0:
+                self.speed = 0
 
     def steer(self, angleChange):
         self.angle += angleChange
@@ -29,7 +44,7 @@ class Car:
         # Create a rectangle representing the car
         car_surface = pygame.Surface((self.carWidth, self.carHeight))
         car_surface.fill(self.colour)
-        car_surface.set_colorkey(("black"))
+        car_surface.set_colorkey("black")
 
         # Rotate the rectangle
         rotated_car = pygame.transform.rotate(car_surface, -math.degrees(self.angle))
@@ -37,4 +52,3 @@ class Car:
         
         # Blit the rotated rectangle onto the display surface
         surface.blit(rotated_car, rotated_rect.topleft)
-
