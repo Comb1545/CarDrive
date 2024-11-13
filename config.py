@@ -11,6 +11,13 @@ CAR_STEER = 3   # degrees
 ACCEL_RATE = 0.2
 DECEL_RATE = 0.2
 
+controls = {
+    "accel" : ACCEL_RATE, 
+    "steerLeft" : -CAR_STEER, 
+    "steerRight" : CAR_STEER, 
+    "gearUP" : 1, 
+    "gearDown" : -1
+    }
 
 
 # loading background image and window

@@ -1,12 +1,4 @@
-from config import CAR_STEER, ACCEL_RATE, DECEL_RATE
-
-controls = {
-    "accel" : ACCEL_RATE, 
-    "steerLeft" : -CAR_STEER, 
-    "steerRight" : CAR_STEER, 
-    "gearUP" : 1, 
-    "gearDown" : -1
-    }
+from config import DECEL_RATE, controls
 
 class CarController:
     def __init__(self, car):
