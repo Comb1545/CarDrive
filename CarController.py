@@ -1,4 +1,4 @@
-from config import DECEL_RATE, controls, ROAD_COLOUR
+from config import DECEL_RATE, controls, ROAD_COLOUR, display, font
 
 class CarController:
     def __init__(self, car):
@@ -32,6 +32,12 @@ class CarController:
             self.car.changeGear(controls["gearUP"])
         if "gearDown" in action:
             self.car.changeGear(controls["gearDown"])
+
+    def displaymoves(self, action):
+        for i, action in enumerate(action):
+            text = font.render(f"{action=}", True, (0, 0, 0))
+
+            display.blit(text, (180, 10 + i * 30))
 
     def update(self):
         self.car.move()
