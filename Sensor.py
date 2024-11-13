@@ -1,7 +1,11 @@
 import math
 import pygame
 
+from config import display, ROAD_COLOUR
+
 class Sensor:
+    surface = display
+
     def __init__(self, car, distance:int, angleOffset):
         self.car = car
         self.distance = distance
@@ -15,19 +19,15 @@ class Sensor:
         self.x = self.car.x + self.distance * math.cos(angle)   # distance in x direction
         self.y = self.car.y + self.distance * math.sin(angle)   # distance in y direction
 
-    def detectColour(self, surface, colour) -> bool:
+    def detectColour(self, colour) -> bool:
         try:
-            sensedColour = surface.get_at((int(self.x), int(self.y)))
+            sensedColour = self.surface.get_at((int(self.x), int(self.y)))
             if sensedColour == colour:
                 return True
-            return False
+            else: return False
         except IndexError:
             return False
     
-    def draw(self, surface):
-        #colour = "green" if self.detectColour(surface, "blue") else "red"
-        if self.detectColour(surface, (0, 0, 255)):
-            colour = "green"
-        else:
-            colour = "red"
-        pygame.draw.circle(surface, colour, (self.x, self.y), 2)
+    def draw(self):
+        colour = "green" if self.detectColour(ROAD_COLOUR) else "red"
+        pygame.draw.circle(self.surface, colour, (self.x, self.y), 2, 1)
