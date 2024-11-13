@@ -1,8 +1,23 @@
-from config import DECEL_RATE, controls
+from config import DECEL_RATE, controls, ROAD_COLOUR
 
 class CarController:
     def __init__(self, car):
         self.car = car
+
+    def getAttributes(self) -> list:
+        attributes = []
+
+        speed = self.car.speed
+        angle = self.car.angle
+        gearTopSpeed = self.car.topSpeed * self.car.gears[self.car.currentGear]
+        sensors = [sensor.detectColour(ROAD_COLOUR) for sensor in self.car.sensors]
+
+        attributes.append(speed)
+        attributes.append(angle)
+        attributes.append(gearTopSpeed)
+        [attributes.append(sensor) for sensor in sensors] # append each sensor from list
+
+        return attributes
 
     def control(self, action:list):
         if "accel" in action:

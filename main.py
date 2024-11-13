@@ -1,6 +1,6 @@
 import pygame
-from Car import Car
 from config import *
+from Car import Car
 
 # declaring a car
 car = Car(WIDTH // 2, HEIGHT // 2, CAR_COLOUR)

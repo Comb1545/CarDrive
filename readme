@@ -1,5 +1,0 @@
-angles are mangaged in degrees, if radians is needed for math,
-convert to radians, do math, return degrees
-
-Each game loop give a list of moves for that gameloop to the controller.
-valid moves in config -> controller{}
